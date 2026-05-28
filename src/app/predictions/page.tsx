@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { runScenario } from "../lib/scenario-engine";
 import { ScenarioLab } from "../components/ScenarioLab";
 import { WinProbabilityPanel } from "../components/WinProbabilityPanel";
@@ -34,7 +35,9 @@ export default function PredictionsPage({
         <p className="text-foreground/70 mt-2">Server-driven projections and interactive win probabilities.</p>
       </div>
 
-      <ScenarioLab />
+      <Suspense fallback={<div className="p-6 text-center text-foreground/50 bg-surface rounded-2xl animate-pulse">Loading Scenario Lab...</div>}>
+        <ScenarioLab />
+      </Suspense>
 
       <div className="grid gap-4 md:grid-cols-5">
         <Stat label="Projected Low" value={result.projectedTotalLow} />
