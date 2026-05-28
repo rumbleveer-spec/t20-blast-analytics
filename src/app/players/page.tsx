@@ -1,5 +1,6 @@
 import { mockPlayers } from '../data/players';
-import { ShieldAlert, TrendingUp, Zap, Target } from 'lucide-react';
+import { ShieldAlert, TrendingUp, Zap, Target, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 export default function PlayersPage() {
   return (
@@ -11,10 +12,13 @@ export default function PlayersPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {mockPlayers.map(player => (
-          <div key={player.id} className="bg-surface border border-surface-hover rounded-xl p-6">
+          <div key={player.id} className="bg-surface border border-surface-hover rounded-xl p-6 hover:border-primary/50 transition-colors">
             <div className="flex justify-between items-start mb-4">
               <div>
-                <h2 className="text-xl font-bold">{player.name}</h2>
+                <Link href={`/players/${player.id}`} className="text-xl font-bold hover:text-primary transition-colors flex items-center gap-2 group">
+                  {player.name}
+                  <ExternalLink size={16} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
                 <div className="text-sm text-foreground/50">{player.role} &bull; {player.battingHand} Hand</div>
               </div>
               <div className="text-right">
