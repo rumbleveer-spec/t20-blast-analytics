@@ -1,0 +1,28 @@
+{
+  "_readme": "n8n Webhook Configuration Instructions",
+  "method": "POST",
+  "url": "https://[YOUR-VPS-DOMAIN-OR-IP]/api/ingest/csv",
+  "headers": {
+    "Authorization": "Bearer t20_secure_ingestion_token_2026",
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "action": "historical_matches",
+    "data": [
+      {
+        "status": "completed",
+        "venue": "Edgbaston, Birmingham",
+        "start_time": "2026-06-01T14:30:00Z"
+      },
+      {
+        "status": "live",
+        "venue": "Trent Bridge, Nottingham",
+        "start_time": "2026-06-02T18:00:00Z"
+      }
+    ]
+  },
+  "_expected_response": {
+    "success": true,
+    "ingested": 2
+  }
+}
