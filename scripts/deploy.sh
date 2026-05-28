@@ -17,7 +17,7 @@ if [ ! -f ".env.local" ]; then
 fi
 
 # 2. Check for Placeholder Secrets
-if grep -q "postgres:postgres@localhost:5432" .env.local; then
+if grep -q "t20_admin:securepass123" .env.local; then
     echo "❌ ERROR: .env.local still contains the placeholder DATABASE_URL."
     echo "Please edit .env.local with your real database credentials before deploying."
     exit 1
