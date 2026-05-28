@@ -1,6 +1,6 @@
-import { FormSparkline } from "../components/FormSparkline";
-import { getRollingBatImpact, getRecoveryAfterLowScore, getVolatilityScore } from "../lib/player-context";
-import type { PlayerMatchLog } from "../types/player-context";
+import { FormSparkline } from "../../components/FormSparkline";
+import { getRollingBatImpact, getRecoveryAfterLowScore, getVolatilityScore } from "../../lib/player-context";
+import type { PlayerMatchLog } from "../../types/player-context";
 import { Activity } from 'lucide-react';
 
 export function PlayerContextSection({ logs }: { logs: PlayerMatchLog[] }) {
