@@ -1,0 +1,11 @@
+- [x] Audit project structure and verify files.
+- [x] Align `ecosystem.config.js`, `drizzle.config.ts`, `.env.example`, `docker-compose.yml`, and `package.json` names and scripts.
+- [x] Update deployment documentation (`VPS_SETUP.md`) to exact operator sequence.
+- [x] Commit all repo-side changes to Git.
+- [x] Append summary to Apple Notes.
+- [ ] Deploy to VPS: `docker compose up -d`
+- [ ] Deploy to VPS: Set up `.env.local`
+- [ ] Deploy to VPS: `npm run db:push`
+- [ ] Deploy to VPS: `npm run db:seed`
+- [ ] Deploy to VPS: `npm run build`
+- [ ] Deploy to VPS: `pm2 start ecosystem.config.js` (or restart `t20-lab`)
