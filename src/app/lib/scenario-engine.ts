@@ -1,4 +1,4 @@
-import { ScenarioInput, ScenarioOutput } from "./scenario";
+import { ScenarioInput, ScenarioOutput } from "../types/scenario";
 
 export function runScenario(input: ScenarioInput): ScenarioOutput {
   const base = 165;

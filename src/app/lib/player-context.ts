@@ -1,4 +1,4 @@
-import { PlayerMatchLog } from "./player-context";
+import { PlayerMatchLog } from "../types/player-context";
 
 export function getRollingBatImpact(logs: PlayerMatchLog[], window = 5) {
   return logs.map((_, idx) => {

@@ -1,4 +1,4 @@
-import { MatchState, WinProbabilityOutput } from "./win-probability";
+import { MatchState, WinProbabilityOutput } from "../types/win-probability";
 
 type TeamStrengthContext = {
   battingRating: number; // 0-100
