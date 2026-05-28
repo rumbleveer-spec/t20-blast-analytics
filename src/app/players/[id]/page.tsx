@@ -13,8 +13,8 @@ export default function PlayerProfile({ params }: { params: { id: string } }) {
 
   // Generate realistic mock logs based on the player's recent form array
   const mockLogs = player.form.recentScores.map((score, idx) => {
-    const runs = score === 'DNB' ? 0 : parseInt(score.toString(), 10) || 0;
-    const balls = score === 'DNB' ? 0 : Math.max(1, runs * 0.75); // rough estimate
+    const runs = score;
+    const balls = Math.max(1, runs * 0.75); // rough estimate
     return {
       matchId: `m-${idx}`,
       opponent: 'Opponent X',
