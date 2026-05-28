@@ -2,6 +2,20 @@
 
 This guide has been optimized for maximum autonomy and minimal operator error. Read thoroughly before running commands.
 
+## 🏁 START HERE: Ultra-Short Operator Guide
+**First time on VPS:**
+1. Run `npm run deploy:setup`
+2. Edit `.env.local` (Add your database URL)
+3. Run `npm run deploy:prod`
+
+**Later updates (Normal Redeploy):**
+1. Run `git pull origin main`
+2. Run `npm run deploy:prod`
+
+*Note: First-time setup cannot be safely reduced to a single command because `.env.local` strictly requires manual, secure secret injection before the database schema and application build can occur.*
+
+---
+
 ## 0. Preflight Checklist
 Before executing any VPS commands, verify the following:
 
@@ -28,11 +42,11 @@ npm run deploy:setup
 ```
 
 ### 1a. Verification: Docker Compose Up
-* **Expected Output**: "✅ Database container started." and "🎉 Setup Preflight Complete!" (or a prompt that `.env.local` is missing, which is correct).
+* **Expected Output**: "✅ Database container is running." and a prompt that `.env.local` was copied.
 * **Failure Interpretation**: If Docker errors out, ensure the daemon is running (`sudo systemctl status docker`) and your user is in the `docker` group.
 
 ### 1b. Environment Creation
-The setup script will copy `.env.example` to `.env.local` and exit if it was missing.
+The setup script will copy `.env.example` to `.env.local` and exit.
 ```bash
 # B. Edit the secrets
 nano .env.local
@@ -47,7 +61,7 @@ npm run deploy:prod
 
 ### 1d. Verification: DB Push & Seed
 * **Expected Output**: Drizzle outputs "Apply changes..." and the seed script prints "Seeding completed successfully!".
-* **Failure Interpretation**: If connection fails, your `DATABASE_URL` in `.env.local` is wrong, or the Docker container isn't fully healthy yet.
+* **Failure Interpretation**: If connection fails or you see a placeholder error, your `DATABASE_URL` in `.env.local` is wrong, or the Docker container isn't fully healthy yet.
 
 ### 1e. Verification: Build
 * **Expected Output**: Next.js compiles chunks and creates the `.next` directory.
@@ -63,7 +77,6 @@ npm run deploy:prod
 When pulling new code in the future:
 ```bash
 git pull origin main
-npm ci
 npm run deploy:prod
 ```
 
@@ -85,7 +98,7 @@ npm run deploy:prod
 - ❌ **DO NOT change `ecosystem.config.js`** blindly. It is strictly tied to `npm run deploy:prod`.
 
 ### Recovery Paths
-- **If DB seeding partially fails**: Run `docker compose restart db`, wait 5 seconds, and re-run `npm run db:seed`. (The script is idempotent because it clears tables first).
+- **If DB seeding partially fails**: Run `docker compose restart db`, wait 5 seconds, and re-run `npm run deploy:prod`. (The script is idempotent because it clears tables first).
 - **If Next.js build hangs**: Run `free -m` to check memory. If low, run:
   ```bash
   sudo fallocate -l 1G /swapfile && sudo chmod 600 /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile
