@@ -2,6 +2,7 @@ import { mockPlayers } from '../../data/players';
 import { ShieldAlert, TrendingUp, Target, ArrowLeft, User } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { PlayerContextSection } from './PlayerContextSection';
 
 export default function PlayerProfile({ params }: { params: { id: string } }) {
   const player = mockPlayers.find(p => p.id === params.id);
@@ -9,6 +10,23 @@ export default function PlayerProfile({ params }: { params: { id: string } }) {
   if (!player) {
     notFound();
   }
+
+  // Generate realistic mock logs based on the player's recent form array
+  const mockLogs = player.form.recentScores.map((score, idx) => {
+    const runs = score === 'DNB' ? 0 : parseInt(score.toString(), 10) || 0;
+    const balls = score === 'DNB' ? 0 : Math.max(1, runs * 0.75); // rough estimate
+    return {
+      matchId: `m-${idx}`,
+      opponent: 'Opponent X',
+      venueId: 'v-1',
+      runs,
+      balls,
+      strikeRate: runs > 0 ? (runs / balls) * 100 : 0,
+      phaseImpact: 1.2,
+      pressureRating: 50 + idx * 5,
+      date: '2026-05-28'
+    };
+  }).reverse();
 
   return (
     <div className="space-y-6">
@@ -32,6 +50,8 @@ export default function PlayerProfile({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
+
+      <PlayerContextSection logs={mockLogs} />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
          <div className="bg-surface border border-surface-hover rounded-xl p-6">
