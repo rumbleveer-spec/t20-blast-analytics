@@ -52,7 +52,7 @@ export function Header() {
         T20 Blast 2026 Lab
       </div>
       <div className="ml-auto flex items-center gap-4">
-        <div className="text-xs text-foreground/50 font-mono">Commander Antigravity</div>
+        <div className="text-xs text-foreground/50 font-mono">Developed By Ankit Rajput</div>
       </div>
     </header>
   );
